@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct ContentView3: View {
+    
+    @State private var isOn = false
+    
     var body: some View {
-        VStack(spacing:30) {
+        VStack() {
         Text("Recipe Matches")
                 .font(.title)
         
+            Spacer(minLength: 30)
             
             HStack() {
                 VStack {
@@ -20,7 +24,6 @@ struct ContentView3: View {
                         .font(.system(size: 18))
                         .fontWeight(.semibold)
                         .opacity(0.9)
-                    
                         
                     Text("Using only items you have")
                         .font(.system(size: 14))
@@ -28,8 +31,52 @@ struct ContentView3: View {
                         .opacity(0.8)
                     
                 }
+                
+                Toggle("", isOn: $isOn)
+                    .tint(Color.orange)
+                
                 Spacer()
             }
+            
+            Divider()
+            
+            List {
+                ForEach(0..<5) { _ in
+                    HStack {
+                        Image(systemName: "carrot.fill")
+                            .font(Font.largeTitle)
+                            .foregroundColor(.orange.opacity(0.8))
+                        VStack {
+                            Text("Dal Tadka")
+                                .font(.system(size: 18))
+                                
+                            HStack() {
+                                Text(" "+"20 min")
+                                Text("Easy")
+                            }
+                            
+                        }
+                        
+                        Spacer()
+                        
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(Font.title)
+                            .foregroundColor(.green)
+                    
+                    
+                        
+                    }
+                    .listRowBackground(Color(.systemGray6))
+                    .padding(.vertical, 4)
+                 
+                }
+                
+            }
+            .scrollContentBackground(.hidden)
+            .background(Color.white)
+          
+            
+            
         
         
         Spacer()

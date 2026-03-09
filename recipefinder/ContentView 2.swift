@@ -21,32 +21,124 @@ struct ContentView2: View {
             Text("Your Pantry")
             
             
-            HStack {
-                Text("Veggies")
-                    .font(Font.largeTitle)
-                    .foregroundColor(.yellow)
-                
-                Spacer()
-                
-                Text("3 selected")
-                
-            }
+//            HStack {
+//                Text("Veggies")
+//                    .font(Font.largeTitle)
+//                    .foregroundColor(.yellow)
+//                
+//                Spacer()
+//                
+//                Text("3 selected")
+//                
+//            }
           
-            ForEach(0..<3) { i in
-                HStack {
-                    Image(systemName: "cup.and.saucer.fill")
-                        .font(Font.largeTitle)
-                        .foregroundColor(.brown)
-                    VStack {
-                        Text("Carrot")
-                        Text("Gajar")
+//            ForEach(0..<3) { i in
+//                HStack {
+//                    Image(systemName: "cup.and.saucer.fill")
+//                        .font(Font.largeTitle)
+//                        .foregroundColor(.brown)
+//                    VStack {
+//                        Text("Carrot")
+//                        Text("Gajar")
+//                    }
+//                    
+//                    Spacer()
+//                    
+//                  CheckboxView(isChecked: $checked)
+//                }
+//            }
+            
+            List {
+               
+                    
+                    Section(
+                        header:
+                            Text("Veggies")
+                                .font(Font.largeTitle)
+                                .foregroundColor(.orange)
+                        
+                    ) {
+                        ForEach(0..<3) { _ in
+                        HStack {
+                            Image(systemName: "cup.and.saucer.fill")
+                                .font(Font.largeTitle)
+                                .foregroundColor(.brown)
+                            VStack {
+                                Text("Carrot")
+                                Text("Gajar")
+                            }
+                            
+                            Spacer()
+                            
+                          CheckboxView(isChecked: $checked)
+                        }
+                        .listRowBackground(Color(.white))
+                        .padding(.vertical, 4)
+                     
                     }
-                    
-                    Spacer()
-                    
-                  CheckboxView(isChecked: $checked)
+                 
                 }
+                
+                Section(header:
+                            Text("Fruits")
+                                .font(Font.largeTitle)
+                                .foregroundColor(.orange)
+                ) {
+                    ForEach(0..<3) { _ in
+                    HStack {
+                        Image(systemName: "cup.and.saucer.fill")
+                            .font(Font.largeTitle)
+                            .foregroundColor(.brown)
+                        VStack {
+                            Text("Carrot")
+                            Text("Gajar")
+                        }
+                        
+                        Spacer()
+                        
+                      CheckboxView(isChecked: $checked)
+                    }
+                    .listRowBackground(Color(.white))
+                    .padding(.vertical, 4)
+                   // .padding(.leading, 0)
+                 
+                }
+             
             }
+              
+                Section(header:
+                            Text("Spices")
+                                .font(Font.largeTitle)
+                                .foregroundColor(.orange)
+                ) {
+                    ForEach(0..<3) { _ in
+                    HStack {
+                        Image(systemName: "cup.and.saucer.fill")
+                            .font(Font.largeTitle)
+                            .foregroundColor(.brown)
+                        VStack {
+                            Text("Carrot")
+                            Text("Gajar")
+                        }
+                        
+                        Spacer()
+                        
+                      CheckboxView(isChecked: $checked)
+                    }
+                    .listRowBackground(Color(.white))
+                    .padding(.vertical, 4)
+                   // .padding(.leading, 0)
+                 
+                }
+             
+            }
+             
+            }
+            
+            .scrollContentBackground(.hidden)
+            .listStyle(.plain)
+            //.background(Color.white)
+            //.padding(EdgeInsets(top: 0, leading: -35, bottom: 0, trailing: -35))
             
             Spacer()
             
