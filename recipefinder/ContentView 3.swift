@@ -41,18 +41,18 @@ struct ContentView3: View {
             Divider()
             
             List {
-                ForEach(0..<5) { _ in
+                ForEach(recipes, id:\.self) { item in
                     HStack {
                         Image(systemName: "carrot.fill")
                             .font(Font.largeTitle)
                             .foregroundColor(.orange.opacity(0.8))
                         VStack {
-                            Text("Dal Tadka")
+                            Text(item.name)
                                 .font(.system(size: 18))
                                 
                             HStack() {
-                                Text(" "+"20 min")
-                                Text("Easy")
+                                Text(item.description)
+                                //Text("Easy")
                             }
                             
                         }
@@ -75,9 +75,6 @@ struct ContentView3: View {
             .scrollContentBackground(.hidden)
             .background(Color.white)
           
-            
-            
-        
         
         Spacer()
             
