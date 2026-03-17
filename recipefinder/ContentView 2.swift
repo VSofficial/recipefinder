@@ -13,51 +13,20 @@ struct ContentView2: View {
    // var isChecked:Bool = false
     @State private var checked = false
     @State private var path = NavigationPath()
-
+    @State private var checkedItems: [String: Bool] = [:]
+    
     var body: some View {
         NavigationStack() {
         //@State var isChecked:Bool = true
             VStack(spacing:30) {
                 Text("Your Pantry")
                 
-                
-                //            HStack {
-                //                Text("Veggies")
-                //                    .font(Font.largeTitle)
-                //                    .foregroundColor(.yellow)
-                //
-                //                Spacer()
-                //
-                //                Text("3 selected")
-                //
-                //            }
-                
-                //            ForEach(0..<3) { i in
-                //                HStack {
-                //                    Image(systemName: "cup.and.saucer.fill")
-                //                        .font(Font.largeTitle)
-                //                        .foregroundColor(.brown)
-                //                    VStack {
-                //                        Text("Carrot")
-                //                        Text("Gajar")
-                //                    }
-                //
-                //                    Spacer()
-                //
-                //                  CheckboxView(isChecked: $checked)
-                //                }
-                //            }
-                
                 List {
-                    
-                    
-                    
                     Section(
                         header:
                             Text("Veggies")
                             .font(Font.largeTitle)
                             .foregroundColor(.orange)
-                        
                     ) {
                         
                         
@@ -70,13 +39,18 @@ struct ContentView2: View {
                                     Text(item)
                                     Text("Gajar")
                                     
-                                    
                                 }
-                                
                                 
                                 Spacer()
                                 
-                                CheckboxView(isChecked: $checked)
+                                //CheckboxView(isChecked: $checked)
+                                CheckboxView(
+                                    isChecked: Binding(
+                                        get: { checkedItems[item] ?? false },
+                                        set: { checkedItems[item] = $0 }
+                                    )
+                                )
+                                
                             }
                             .listRowBackground(Color(.white))
                             .padding(.vertical, 4)
@@ -102,7 +76,13 @@ struct ContentView2: View {
                                 
                                 Spacer()
                                 
-                                CheckboxView(isChecked: $checked)
+                                //CheckboxView(isChecked: $checked)
+                                CheckboxView(
+                                    isChecked: Binding(
+                                        get: { checkedItems[item] ?? false },
+                                        set: { checkedItems[item] = $0 }
+                                    )
+                                )
                             }
                             .listRowBackground(Color(.white))
                             .padding(.vertical, 4)
@@ -129,7 +109,13 @@ struct ContentView2: View {
                                 
                                 Spacer()
                                 
-                                CheckboxView(isChecked: $checked)
+                                //CheckboxView(isChecked: $checked)
+                                CheckboxView(
+                                    isChecked: Binding(
+                                        get: { checkedItems[item] ?? false },
+                                        set: { checkedItems[item] = $0 }
+                                    )
+                                )
                             }
                             .listRowBackground(Color(.white))
                             .padding(.vertical, 4)
@@ -148,27 +134,8 @@ struct ContentView2: View {
                 
                 Spacer()
                 
-               NavigationLink("Open Detail", destination: ContentView3())
-                
-//                    Button(action: {
-//                        NavigationLink(destination: ContentView3()) { }
-//                    })
-//                    
-//                    {
-//                        Text("Match 12 Recipes")
-//                            .frame(width: 200, height: 40, alignment: .center)
-//                            .font(.system(size: 20, weight: .semibold, design: .default))
-//                            .foregroundStyle(Color.white)
-//                        
-//                    }
-//                  
-//                    
-//                    .foregroundStyle(Color.black)
-//                    .background(Color.orange)
-//                    .buttonStyle(.bordered)
-//                    .clipShape(.capsule)
-             //   }
-              
+               NavigationLink("Open Detail", destination: ContentView3(selectedItems: checkedItems))
+                 
           }
           
         }

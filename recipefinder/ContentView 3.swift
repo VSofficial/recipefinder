@@ -9,7 +9,28 @@ import SwiftUI
 
 struct ContentView3: View {
     
+    
+    var selectedItems: [String: Bool]
     @State private var isOn = false
+    
+    var filteredRecipes: [Recipe] {
+        recipes.filter { recipe in
+            let recipeIngredients = recipe.ingredients
+            
+           
+            if isOn {
+                // STRICT MODE → all ingredients must exist
+                return recipeIngredients.allSatisfy { selectedIngredients.contains($0) }
+            } else {
+                // RELAXED MODE → at least one match
+                return recipeIngredients.contains { selectedIngredients.contains($0) }
+            }
+        }
+    }
+    
+    var selectedIngredients: [String] {
+        selectedItems.compactMap { $0.value ? $0.key : nil }
+    }
     
     var body: some View {
         VStack() {
@@ -41,7 +62,13 @@ struct ContentView3: View {
             Divider()
             
             List {
-                ForEach(recipes, id:\.self) { item in
+                ForEach(filteredRecipes, id:\.self) { item in
+                    
+                    let isFullMatch = item.ingredients.allSatisfy {
+                           selectedIngredients.contains($0)
+                       }
+                       
+                    
                     HStack {
                         Image(systemName: "carrot.fill")
                             .font(Font.largeTitle)
@@ -59,10 +86,9 @@ struct ContentView3: View {
                         
                         Spacer()
                         
-                        Image(systemName: "checkmark.circle.fill")
-                            .font(Font.title)
-                            .foregroundColor(.green)
-                    
+                        Image(systemName: isFullMatch ? "checkmark.circle.fill" : "exclamationmark.circle")
+                            .font(.title)
+                            .foregroundColor(isFullMatch ? .green : .orange)
                     
                         
                     }
@@ -81,8 +107,11 @@ struct ContentView3: View {
         }
         .padding()
     }
+    
 }
 
+
 #Preview {
-    ContentView3()
+    ContentView3(selectedItems: ["Carrots":true, "Onions":true, "Beets":true])
 }
+
