@@ -20,7 +20,7 @@ struct Recipe:Hashable {
     var description: String
 }
 
-var ingredients = Ingredients(veggies: ["Carrots", "Onions", "Beets"], fruits: ["Apples", "Bananas"], spices: ["Cinnamon", "Coriander"], dairy: ["Cheese"], others: ["Olive Oil", "Garlic"])
+var ingredientsExisting = Ingredients(veggies: ["Carrots", "Onions", "Beets"], fruits: ["Apples", "Bananas"], spices: ["Cinnamon", "Coriander"], dairy: ["Cheese"], others: ["Olive Oil", "Garlic"])
 
 var recipes: [Recipe] = [
     Recipe(name: "Dal Tadka", ingredients: ["Carrots", "Coriander"], description: "Dal Tadka Description"),
@@ -28,3 +28,4 @@ var recipes: [Recipe] = [
  
 ]
     
+
