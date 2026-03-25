@@ -20,55 +20,10 @@ struct ContentView2: View {
     @State private var ingredients = Ingredients()
     
     
-    //@State private var searchText = ""
-   // @State private var debouncedSearch = ""
-   // @State private var ingredients = Ingredients()
     @State private var filteredIngredients: [String] = []
     
     
-//    var filteredIngredients: [String] {
-//        if searchText.isEmpty {
-//            return ingredients.others
-//        } else {
-//            return ingredients.others.filter {
-//                $0.localizedCaseInsensitiveContains(searchText)
-//            }
-//        }
-//    }
-//    
-//    var filteredIngredients: [String] {
-//        let base = searchText.isEmpty
-//            ? ingredients.others
-//            : ingredients.others.filter {
-//                $0.localizedCaseInsensitiveContains(searchText)
-//            }
-//        
-//        return Array(base.prefix(100)) // 👈 limit
-//    }
-    
-//    var filteredIngredients: [String] {
-//        let search = debouncedSearch
-//            .lowercased()
-//            .trimmingCharacters(in: .whitespacesAndNewlines)
-//
-//        if search.isEmpty {
-//            return Array(ingredients.others.prefix(20))
-//        }
-//
-//        var result: [String] = []
-//
-//        for item in ingredients.others {
-//            if item.hasPrefix(search) {
-//                result.insert(item, at: 0) // prioritize
-//            } else if item.contains(search) {
-//                result.append(item)
-//            }
-//
-//            if result.count >= 20 { break }
-//        }
-//
-//        return result
-//    }
+
     
     var body: some View {
         
@@ -77,10 +32,9 @@ struct ContentView2: View {
         //@State var isChecked:Bool = true
             VStack(spacing:30) {
                 Text("Your Pantry")
-//                NavigationLink("Open Detail", destination: ContentView3(selectedItems: selectedItems))
-                NavigationLink("Open Detail") {
-                    ContentView3(selectedItems: selectedItems)
-                }
+//                NavigationLink("Open Detail") {
+//                    ContentView3(selectedItems: selectedItems)
+//                }
                 
                 TextField("Search ingredients...", text: $searchText)
                     .textFieldStyle(.roundedBorder)
@@ -99,142 +53,6 @@ struct ContentView2: View {
                         }
                     }
                 
-//                List {
-//                    Section(
-//                        header:
-//                            Text("Veggies")
-//                            .font(Font.largeTitle)
-//                            .foregroundColor(.orange)
-//                    ) {
-//                        
-//                        
-//                        ForEach(filteredIngredients, id: \.self) { item in
-//                            HStack() {
-//                                Image(systemName: "carrot.fill")
-//                                    .font(Font.largeTitle)
-//                                    .foregroundColor(.orange.opacity(0.8))
-//                                VStack {
-//                                    Text(item)
-//                                    //Text("Gajar")
-//                                    
-//                                }
-//                                
-//                                Spacer()
-//                                
-//                               // CheckboxView(isChecked: $checked)
-////                                CheckboxView(
-////                                    isChecked: Binding(
-////                                        get: { checkedItems[item] ?? false },
-////                                        set: { checkedItems[item] = $0 }
-////                                    )
-////                                )
-//                                CheckboxView(
-//                                    isChecked: Binding(
-//                                        get: { selectedItems.contains(item) },
-//                                        set: { value in
-//                                            if value {
-//                                                selectedItems.insert(item)
-//                                            } else {
-//                                                selectedItems.remove(item)
-//                                            }
-//                                        }
-//                                    )
-//                                )
-//                                
-//                            }
-//                            .listRowBackground(Color(.white))
-//                            .padding(.vertical, 4)
-//                            
-//                            
-//                        }
-//                        
-//                    }
-//                    
-////                    Section(header:
-////                                Text("Fruits")
-////                        .font(Font.largeTitle)
-////                        .foregroundColor(.orange)
-////                    ) {
-////                        ForEach(ingredients.fruits, id: \.self) { item in
-////                            HStack {
-////                                Image(systemName: "cup.and.saucer.fill")
-////                                    .font(Font.largeTitle)
-////                                    .foregroundColor(.brown)
-////                                VStack {
-////                                    Text(item)
-////                                    Text("Gajar")
-////                                }
-////                                
-////                                Spacer()
-////                                
-////                                //CheckboxView(isChecked: $checked)
-////                                CheckboxView(
-////                                    isChecked: Binding(
-////                                        get: { checkedItems[item] ?? false },
-////                                        set: { checkedItems[item] = $0 }
-////                                    )
-////                                )
-////                            }
-////                            .listRowBackground(Color(.white))
-////                            .padding(.vertical, 4)
-////                            // .padding(.leading, 0)
-////                            
-////                        }
-////                        
-////                    }
-////                    
-////                    Section(header:
-////                                Text("Spices")
-////                        .font(Font.largeTitle)
-////                        .foregroundColor(.orange)
-////                    ) {
-////                        ForEach(ingredients.spices, id: \.self) { item in
-////                            HStack {
-////                                Image(systemName: "takeoutbag.and.cup.and.straw.fill")
-////                                    .font(Font.largeTitle)
-////                                    .foregroundColor(.yellow)
-////                                VStack {
-////                                    Text(item)
-////                                    Text("Gajar")
-////                                }
-////                                
-////                                Spacer()
-////                                
-////                                //CheckboxView(isChecked: $checked)
-////                                CheckboxView(
-////                                    isChecked: Binding(
-////                                        get: { checkedItems[item] ?? false },
-////                                        set: { checkedItems[item] = $0 }
-////                                    )
-////                                )
-////                            }
-////                            .listRowBackground(Color(.white))
-////                            .padding(.vertical, 4)
-////                            // .padding(.leading, 0)
-////                            
-////                        }
-////                        
-////                    }
-////                    
-////                    Section(header:
-////                        Text("Others")
-////                            .font(.largeTitle)
-////                            .foregroundColor(.orange)
-////                    ) {
-////                        ForEach(ingredients.others, id: \.self) { item in
-////                            Text(item)
-////                        }
-////                    }
-//                    
-//                }
-//                
-//                .scrollContentBackground(.hidden)
-//                .listStyle(.plain)
-//                .searchable(text: $searchText, prompt: "Search ingredients...")
-//                //.background(Color.white)
-//                //.padding(EdgeInsets(top: 0, leading: -35, bottom: 0, trailing: -35))
-//                //.id(debouncedSearch)
-//
                 ScrollView {
                     LazyVStack(spacing: 10) {
                         ForEach(filteredIngredients, id: \.self) { item in
@@ -275,20 +93,6 @@ struct ContentView2: View {
                 
                
           }
-            
-          //  .searchable(text: $searchText)
-//            .onAppear {
-//                let recipeModels = loadRecipes() ?? []
-//                let allIngredients = extractAllIngredients(from: recipeModels)
-//
-//                ingredients = categorizeIngredients(allIngredients)
-//
-//                filteredIngredients = performSearch(
-//                    searchText: "",
-//                    source: ingredients.others
-//                )
-//            }
-            
             .onAppear {
                 let recipeModels = loadRecipes() ?? []
                 let allIngredients = extractAllIngredients(from: recipeModels)
@@ -306,11 +110,15 @@ struct ContentView2: View {
                 print("Count:", ingredients.others.count)
             }
            
-            .onSubmit(of: .search) {
+
+            
+            .searchable(text: $searchText, prompt: "Search ingredients...")
+            .onChange(of: searchText) { newValue in
+                
                 DispatchQueue.global(qos: .userInitiated).async {
                     
                     let result = performSearch(
-                        searchText: searchText,
+                        searchText: newValue,
                         source: ingredients.others
                     )
 
@@ -319,15 +127,9 @@ struct ContentView2: View {
                     }
                 }
             }
-            
-            
-          
         }
         .padding()
-        
-        
     }
-    
 }
 
 
