@@ -10,48 +10,56 @@ import SwiftUI
 
 struct ContentView2: View {
     
-   // var isChecked:Bool = false
+    // var isChecked:Bool = false
     @State private var checked = false
-    @State private var path = NavigationPath()
+    //@State private var path = NavigationPath()
     @State private var checkedItems: [String: Bool] = [:]
     @State private var selectedItems: Set<String> = []
     @State private var searchText = ""
     @State private var debouncedSearch = ""
     @State private var ingredients = Ingredients()
-    
+    @State private var path = [Route]()
     
     @State private var filteredIngredients: [String] = []
     
     
-
-    
     var body: some View {
         
-       
-        NavigationStack() {
-        //@State var isChecked:Bool = true
-            VStack(spacing:30) {
-                Text("Your Pantry")
-//                NavigationLink("Open Detail") {
-//                    ContentView3(selectedItems: selectedItems)
-//                }
+        NavigationStack(path: $path) {
+            //@State var isChecked:Bool = true
+            VStack(spacing:15) {
                 
-                TextField("Search ingredients...", text: $searchText)
-                    .textFieldStyle(.roundedBorder)
-                    .padding()
-                    .onSubmit(of: .search) {
-                        DispatchQueue.global(qos: .userInitiated).async {
-                            
-                            let result = performSearch(
-                                searchText: searchText,
-                                source: ingredients.others
-                            )
-
-                            DispatchQueue.main.async {
-                                self.filteredIngredients = result
-                            }
+                
+                HStack {
+                Text("Your Pantry")
+                    Image(systemName: "takeoutbag.and.cup.and.straw.fill")
+                        
+           
+                }
+                .font(Font.title2.bold())
+                .foregroundStyle(Color.brown)
+                .symbolRenderingMode(.hierarchical)
+                
+                
+                HStack() {
+                    Button("Go to Recipes") {
+                        // 🧠 ensures single instance
+                        if !path.contains(.content3) {
+                            path.append(.content3)
                         }
+                        
                     }
+                    
+                    Image(systemName: "arrow.right.circle")
+                }
+                
+                .padding(10)
+                .foregroundStyle(Color.white)
+                .font(Font.title3.bold())
+                .background(Color.brown)
+                .clipShape(Capsule())
+                
+            
                 
                 ScrollView {
                     LazyVStack(spacing: 10) {
@@ -61,13 +69,13 @@ struct ContentView2: View {
                                 Image("veggie")
                                     .resizable()
                                     .frame(width: 40, height: 40)
-                                    //.font(.largeTitle)
+                                //.font(.largeTitle)
                                     .foregroundColor(.orange.opacity(0.8))
-
+                                
                                 Text(item)
-
+                                
                                 Spacer()
-
+                                
                                 CheckboxView(
                                     isChecked: Binding(
                                         get: { selectedItems.contains(item) },
@@ -91,27 +99,26 @@ struct ContentView2: View {
                 
                 Spacer()
                 
-               
-          }
+                
+            }
             .onAppear {
                 let recipeModels = loadRecipes() ?? []
                 let allIngredients = extractAllIngredients(from: recipeModels)
-
+                
                 ingredients = categorizeIngredients(allIngredients)
-
+                
                 // normalize once
                 ingredients.others = ingredients.others.map { $0.lowercased() }
-
+                
                 filteredIngredients = performSearch(
                     searchText: "",
                     source: ingredients.others
                 )
                 
                 print("Count:", ingredients.others.count)
+                
+                
             }
-           
-
-            
             .searchable(text: $searchText, prompt: "Search ingredients...")
             .onChange(of: searchText) { newValue in
                 
@@ -121,18 +128,25 @@ struct ContentView2: View {
                         searchText: newValue,
                         source: ingredients.others
                     )
-
+                    
                     DispatchQueue.main.async {
                         self.filteredIngredients = result
                     }
                 }
             }
+            .padding()
+            //.navigationTitle("ContentView2")
+            
+            // 🔁 Destination mapping
+            .navigationDestination(for: Route.self) { route in
+                switch route {
+                case .content3:
+                    ContentView3(selectedItems: selectedItems)
+                }
+            }
         }
-        .padding()
     }
 }
-
-
 
 #Preview {
     ContentView2()
@@ -140,9 +154,9 @@ struct ContentView2: View {
 
 
 struct CheckboxView: View {
-
+    
     @Binding var isChecked: Bool
-
+    
     var body: some View {
         Button(action: {
             isChecked.toggle()
@@ -151,7 +165,7 @@ struct CheckboxView: View {
                 Image(systemName: isChecked ? "checkmark.square.fill" : "square")
                     .foregroundStyle(Color.orange)
                     .font(Font.system(size: 30))
-                    
+                
             }
         }
     }

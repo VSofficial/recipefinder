@@ -29,3 +29,6 @@ var recipes: [Recipe] = [
 ]
     
 
+enum Route: Hashable {
+    case content3
+}
