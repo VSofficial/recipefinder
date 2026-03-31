@@ -97,9 +97,9 @@ func categorizeIngredients(_ all: [String]) -> Ingredients {
     let spiceSet: Set<String> = ["salt", "pepper", "coriander", "garam masala", "turmeric"]
     let dairySet: Set<String> = ["milk", "cheese", "butter", "paneer"]
     
-    var ingredients = Ingredients() // ✅ fresh clean start
+    var ingredients = Ingredients() 
 
-    for item in Set(all) { // ✅ remove duplicates
+    for item in Set(all) {
         if veggieSet.contains(item) {
             ingredients.veggies.append(item)
         } else if fruitSet.contains(item) {

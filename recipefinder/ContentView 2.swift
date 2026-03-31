@@ -33,8 +33,6 @@ struct ContentView2: View {
                 HStack {
                 Text("Your Pantry")
                     Image(systemName: "takeoutbag.and.cup.and.straw.fill")
-                        
-           
                 }
                 .font(Font.title2.bold())
                 .foregroundStyle(Color.brown)
@@ -59,7 +57,47 @@ struct ContentView2: View {
                 .background(Color.brown)
                 .clipShape(Capsule())
                 
-            
+                ScrollView(.horizontal) {
+                    
+                    LazyHStack(spacing: 10) {
+                        
+                       
+                            ForEach(ingredients.veggies, id: \.self) { item in
+                                HStack(spacing:8) {
+                            
+                                    Text(item)
+                                        .font(.system(size: 20))
+                                    
+                                    Image(systemName:"x.circle")
+                                        .resizable()
+                                        .frame(width: 18, height: 18)
+                                        .foregroundColor(.gray.opacity(1))
+                                    
+                                    
+                                
+                            }
+                                .padding(.horizontal, 15)
+                                .padding(.vertical, 5)
+                                .background(Color.yellow.opacity(0.2))
+                                .clipShape(Capsule())
+                               
+                                //.scaledToFill()
+                        }
+                           // .padding(20)
+                       
+                       // .background(Color.gray.opacity(0.6))
+                   
+                    }
+                
+                    .padding(10)
+                  //  .background(Color.gray.opacity(0.2))
+                    
+                  
+                    
+                }
+                .scaledToFit()
+              
+                .scrollIndicators(.hidden)
                 
                 ScrollView {
                     LazyVStack(spacing: 10) {
@@ -101,6 +139,7 @@ struct ContentView2: View {
                 
                 
             }
+            
             .onAppear {
                 let recipeModels = loadRecipes() ?? []
                 let allIngredients = extractAllIngredients(from: recipeModels)
@@ -114,11 +153,9 @@ struct ContentView2: View {
                     searchText: "",
                     source: ingredients.others
                 )
-                
                 print("Count:", ingredients.others.count)
-                
-                
             }
+            
             .searchable(text: $searchText, prompt: "Search ingredients...")
             .onChange(of: searchText) { newValue in
                 
@@ -137,7 +174,7 @@ struct ContentView2: View {
             .padding()
             //.navigationTitle("ContentView2")
             
-            // 🔁 Destination mapping
+            // Destination mapping
             .navigationDestination(for: Route.self) { route in
                 switch route {
                 case .content3:

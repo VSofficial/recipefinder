@@ -17,21 +17,6 @@ struct ContentView3: View {
     var selectedItems: Set<String>
     @State private var isOn = false
     
-//    var filteredRecipes: [Recipe] {
-//        recipes.filter { recipe in
-//            let recipeIngredients = recipe.ingredients
-//            
-//           
-//            if isOn {
-//                // STRICT MODE → all ingredients must exist
-//                return recipeIngredients.allSatisfy { selectedIngredients.contains($0) }
-//            } else {
-//                // RELAXED MODE → at least one match
-//                return recipeIngredients.contains { selectedIngredients.contains($0) }
-//            }
-//        }
-//    }
-    
     var filteredRecipes: [Recipe] {
         recipes.filter { recipe in
             let recipeIngredients = recipe.ingredients
@@ -47,12 +32,7 @@ struct ContentView3: View {
             }
         }
     }
-    
-//    var selectedIngredients: [String] {
-//        selectedItems.compactMap { $0.value ? $0.key : nil }
-//            .map { normalizeIngredient($0) }
-//    }
-    
+
     var selectedIngredients: [String] {
         selectedItems.map { normalizeIngredient($0) }
     }
@@ -104,13 +84,8 @@ struct ContentView3: View {
                         VStack {
                             Text(""+item.name)
                                 .font(.system(size: 18))
-                                
-                            HStack() {
-                             //   Text(item.description)
-                                
-                                //Text("Easy")
-                            }
                             
+                    
                         }
                         .padding(6)
                         
@@ -123,9 +98,7 @@ struct ContentView3: View {
                         
                     }
                     .listRowBackground(Color.orange.opacity(0.1))
-                    //.listStyle(InsetGroupedListStyle())
-                    //.padding(.horizontal, 0)
-                 
+                  
                 }
                 
             }

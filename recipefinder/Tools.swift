@@ -13,7 +13,7 @@ func performSearch(searchText: String, source: [String]) -> [String] {
     let search = searchText.lowercased()
 
     if search.isEmpty {
-        return Array(source.prefix(40)) // 👈 limit immediately
+        return Array(source.prefix(40)) 
     }
 
     var result: [String] = []
@@ -25,7 +25,7 @@ func performSearch(searchText: String, source: [String]) -> [String] {
             result.append(item)
         }
 
-        if result.count >= 40 { break } // 👈 STOP EARLY
+        if result.count >= 40 { break }
     }
 
     return result
