@@ -8,25 +8,40 @@
 import SwiftUI
 import Foundation
 
+//func performSearch(searchText: String, source: [String]) -> [String] {
+//    
+//    let search = searchText.lowercased()
+//
+//    if search.isEmpty {
+//        return Array(source.prefix(40)) 
+//    }
+//
+//    var result: [String] = []
+//
+//    for item in source {
+//        if item.hasPrefix(search) {
+//            result.insert(item, at: 0)
+//        } else if item.contains(search) {
+//            result.append(item)
+//        }
+//
+//        if result.count >= 40 { break }
+//    }
+//
+//    return result
+//}
+
 func performSearch(searchText: String, source: [String]) -> [String] {
+    let query = normalizeIngredient(cleanIngredient(searchText))
     
-    let search = searchText.lowercased()
-
-    if search.isEmpty {
-        return Array(source.prefix(40)) 
+    if query.isEmpty {
+        return source
     }
-
-    var result: [String] = []
-
-    for item in source {
-        if item.hasPrefix(search) {
-            result.insert(item, at: 0)
-        } else if item.contains(search) {
-            result.append(item)
-        }
-
-        if result.count >= 40 { break }
+    
+    return source.filter { item in
+        let normalizedItem = normalizeIngredient(cleanIngredient(item))
+        
+        return normalizedItem.contains(query) ||
+               query.contains(normalizedItem)
     }
-
-    return result
 }

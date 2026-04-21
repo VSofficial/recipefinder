@@ -7,6 +7,27 @@
 
 import Foundation
 
+struct IngredientsList: Codable {
+    let ingredients: [String]
+}
+
+func loadIngredients() -> IngredientsList? {
+    guard let url = Bundle.main.url(forResource: "ingredients", withExtension: "json") else {
+        print("File not found")
+        return nil
+    }
+
+    do {
+        let data = try Data(contentsOf: url)
+        let recipes = try JSONDecoder().decode(IngredientsList.self, from: data)
+        return recipes
+    } catch {
+        print("Decoding error:", error)
+        return nil
+    }
+}
+
+
 // MARK: - RecipeModelElement
 struct RecipeModelElement: Codable {
     let translatedRecipeName, translatedIngredients: String
@@ -49,20 +70,63 @@ func loadRecipes() -> RecipeModel? {
     }
 }
 
+//func extractAllIngredients(from recipes: RecipeModel) -> [String] {
+//    var all: Set<String> = []
+//
+//    for recipe in recipes {
+//        let items = recipe.cleanedIngredients
+//            .lowercased()
+//            .components(separatedBy: ",")
+//            .map { cleanIngredient($0) }
+//
+//
+//        all.formUnion(items.filter { !$0.isEmpty })
+//    }
+//
+//    return Array(all)
+//}
+
 func extractAllIngredients(from recipes: RecipeModel) -> [String] {
-    var all: Set<String> = []
+    var all = Set<String>()
 
     for recipe in recipes {
         let items = recipe.cleanedIngredients
-            .lowercased()
             .components(separatedBy: ",")
-            .map { cleanIngredient($0) }
+            .map { raw -> String in
+                var text = raw.lowercased()
+                
+                // Normalize spaces
+                text = text.trimmingCharacters(in: .whitespacesAndNewlines)
+                text = text.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+                
+                // Remove numbers (like 1/2, 2 etc.)
+                text = text.replacingOccurrences(
+                    of: "[0-9]+(/[0-9]+)?",
+                    with: "",
+                    options: .regularExpression
+                )
+                
+                // Remove special characters
+                text = text.replacingOccurrences(
+                    of: "[^a-zA-Z ]",
+                    with: "",
+                    options: .regularExpression
+                )
+                
+                // Final trim again
+                text = text.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+           
+                return text
+            }
+            .filter { !$0.isEmpty }
 
-        all.formUnion(items.filter { !$0.isEmpty })
+        all.formUnion(items)
     }
 
-    return Array(all)
+    return Array(all).sorted()
 }
+
 
 func cleanIngredient(_ text: String) -> String {
     var cleaned = text.lowercased()
@@ -74,21 +138,31 @@ func cleanIngredient(_ text: String) -> String {
         options: .regularExpression
     )
     
-    // Remove special characters (keep letters and spaces)
+    // Remove special characters
     cleaned = cleaned.replacingOccurrences(
         of: "[^a-zA-Z ]",
         with: "",
         options: .regularExpression
     )
     
-    // Trim extra spaces
-    cleaned = cleaned.trimmingCharacters(in: .whitespacesAndNewlines)
+    // Remove common unwanted words
+    let stopWords: Set<String> = [
+        "fresh", "chopped", "sliced", "diced", "minced",
+        "large", "small", "medium", "optional", "to", "taste"
+    ]
     
-    // Remove extra inner spaces
-    cleaned = cleaned.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+    let words = cleaned
+        .components(separatedBy: " ")
+        .filter { !$0.isEmpty && !stopWords.contains($0) }
     
-    return cleaned
+    // ✅ Keep only first 1–2 meaningful words
+    let limitedWords = Array(words.prefix(2))
+    
+    return limitedWords.joined(separator: " ")
 }
+
+
+
 
 func categorizeIngredients(_ all: [String]) -> Ingredients {
     

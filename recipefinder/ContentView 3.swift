@@ -17,18 +17,36 @@ struct ContentView3: View {
     var selectedItems: Set<String>
     @State private var isOn = false
     
+//    var filteredRecipes: [Recipe] {
+//        recipes.filter { recipe in
+//            let recipeIngredients = recipe.ingredients
+//
+//            if isOn {
+//                return recipeIngredients.allSatisfy {
+//                    selectedIngredients.contains($0)
+//                }
+//            } else {
+//                return recipeIngredients.contains {
+//                    selectedIngredients.contains($0)
+//                }
+//            }
+//        }
+//    }
+    
     var filteredRecipes: [Recipe] {
         recipes.filter { recipe in
             let recipeIngredients = recipe.ingredients
-
+            
+            let matchCount = recipeIngredients.filter {
+                selectedIngredients.contains($0)
+            }.count
+            
             if isOn {
-                return recipeIngredients.allSatisfy {
-                    selectedIngredients.contains($0)
-                }
+                // strict mode (all ingredients must match)
+                return matchCount == recipeIngredients.count
             } else {
-                return recipeIngredients.contains {
-                    selectedIngredients.contains($0)
-                }
+                // relaxed mode (at least 4 matches)
+                return matchCount >= 4
             }
         }
     }
@@ -74,6 +92,7 @@ struct ContentView3: View {
                            selectedIngredients.contains($0)
                        }
                        
+                   
                     
                     HStack {
                         
@@ -81,13 +100,25 @@ struct ContentView3: View {
                             .resizable()
                             .frame(width: 40, height: 40)
                             .foregroundColor(.orange.opacity(0.8))
-                        VStack {
+                        
+                        VStack(alignment: .leading) {
                             Text(""+item.name)
                                 .font(.system(size: 18))
+                            
+                            HStack {
+                                Text(String(selectedItems.count ?? 0) + "/" + String(item.ingredients.count))
+                                Text("ingredients")
+                                //Text(String(filteredRecipes.count ?? 0))
+                            }
+                            .padding(6)
+                            .background(.yellow.opacity(0.2))
+                            .clipShape(.capsule)
+                           
                             
                     
                         }
                         .padding(6)
+                    
                         
                         Spacer()
                         
@@ -115,15 +146,15 @@ struct ContentView3: View {
 }
 
 func normalizeIngredient(_ text: String) -> String {
-    var cleaned = text.lowercased()
+    var cleaned = text.trimmingCharacters(in: .whitespacesAndNewlines)
     
-    // remove plural 's'
-    if cleaned.hasSuffix("s") {
-        cleaned.removeLast()
+    if cleaned.hasSuffix("ies") {
+        cleaned = String(cleaned.dropLast(3)) + "y"
+    } else if cleaned.hasSuffix("es") {
+        cleaned = String(cleaned.dropLast(2))
+    } else if cleaned.hasSuffix("s") && cleaned.count > 3 {
+        cleaned = String(cleaned.dropLast())
     }
-    
-    // trim spaces
-    cleaned = cleaned.trimmingCharacters(in: .whitespacesAndNewlines)
     
     return cleaned
 }
@@ -131,10 +162,10 @@ func normalizeIngredient(_ text: String) -> String {
 extension RecipeModelElement {
     func toRecipe() -> Recipe {
         let ingredientsArray = cleanedIngredients
-            .lowercased()
             .components(separatedBy: ",")
-            //.map { cleanIngredient($0) }
-            .map { normalizeIngredient(cleanIngredient($0)) }
+            .map { ingredient in
+                normalizeIngredient(cleanIngredient(ingredient))
+            }
             .filter { !$0.isEmpty }
 
         return Recipe(
@@ -146,8 +177,26 @@ extension RecipeModelElement {
 }
 
 
+//extension RecipeModelElement {
+//    func toRecipe() -> Recipe {
+//        let ingredientsArray = cleanedIngredients
+//            .lowercased()
+//            .components(separatedBy: ",")
+//            //.map { cleanIngredient($0) }
+//            .map { normalizeIngredient(cleanIngredient($0)) }
+//            .filter { !$0.isEmpty }
+//
+//        return Recipe(
+//            name: translatedRecipeName,
+//            ingredients: ingredientsArray,
+//            description: translatedInstructions
+//        )
+//    }
+//}
+
+
 
 
 #Preview {
-    ContentView3(selectedItems: ["Carrots", "Onions", "Beets"])
+    ContentView3(selectedItems: ["tomato","potato","salt","oil"])
 }

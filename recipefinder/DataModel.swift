@@ -6,6 +6,10 @@
 //
 import Foundation
 
+// MARK: - IngredientsList
+
+
+
 struct Ingredients {
     var veggies: [String] = []
     var fruits: [String] = []

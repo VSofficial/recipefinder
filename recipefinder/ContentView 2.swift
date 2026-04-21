@@ -22,13 +22,13 @@ struct ContentView2: View {
     
     @State private var filteredIngredients: [String] = []
     
+    let store = IngredientStore.shared
     
     var body: some View {
         
         NavigationStack(path: $path) {
             //@State var isChecked:Bool = true
             VStack(spacing:15) {
-                
                 
                 HStack {
                 Text("Your Pantry")
@@ -38,14 +38,14 @@ struct ContentView2: View {
                 .foregroundStyle(Color.brown)
                 .symbolRenderingMode(.hierarchical)
                 
-                
                 HStack() {
                     Button("Go to Recipes") {
+                        
+                        print(selectedItems)
                         // 🧠 ensures single instance
                         if !path.contains(.content3) {
                             path.append(.content3)
                         }
-                        
                     }
                     
                     Image(systemName: "arrow.right.circle")
@@ -61,8 +61,7 @@ struct ContentView2: View {
                     
                     LazyHStack(spacing: 10) {
                         
-                       
-                            ForEach(ingredients.veggies, id: \.self) { item in
+                            ForEach(Array(selectedItems), id: \.self) { item in
                                 HStack(spacing:8) {
                             
                                     Text(item)
@@ -70,33 +69,24 @@ struct ContentView2: View {
                                     
                                     Image(systemName:"x.circle")
                                         .resizable()
-                                        .frame(width: 18, height: 18)
-                                        .foregroundColor(.gray.opacity(1))
-                                    
-                                    
-                                
+                                        .frame(width: 22, height: 22)
+                                        .foregroundColor(.black.opacity(0.8))
+                                        .onTapGesture {
+                                            selectedItems.remove(item)
+                                        }
                             }
                                 .padding(.horizontal, 15)
-                                .padding(.vertical, 5)
+                                .padding(.vertical, 8)
                                 .background(Color.yellow.opacity(0.2))
                                 .clipShape(Capsule())
                                
-                                //.scaledToFill()
                         }
-                           // .padding(20)
-                       
-                       // .background(Color.gray.opacity(0.6))
-                   
                     }
-                
                     .padding(10)
-                  //  .background(Color.gray.opacity(0.2))
-                    
-                  
                     
                 }
-                .scaledToFit()
-              
+                .fixedSize(horizontal: false, vertical: true)
+               
                 .scrollIndicators(.hidden)
                 
                 ScrollView {
@@ -137,23 +127,15 @@ struct ContentView2: View {
                 
                 Spacer()
                 
-                
             }
             
             .onAppear {
-                let recipeModels = loadRecipes() ?? []
-                let allIngredients = extractAllIngredients(from: recipeModels)
-                
-                ingredients = categorizeIngredients(allIngredients)
-                
-                // normalize once
-                ingredients.others = ingredients.others.map { $0.lowercased() }
-                
+
                 filteredIngredients = performSearch(
                     searchText: "",
-                    source: ingredients.others
+                    source: store.ingredients
                 )
-                print("Count:", ingredients.others.count)
+                print("Count:", store.ingredients.count)
             }
             
             .searchable(text: $searchText, prompt: "Search ingredients...")
@@ -163,7 +145,7 @@ struct ContentView2: View {
                     
                     let result = performSearch(
                         searchText: newValue,
-                        source: ingredients.others
+                        source: store.ingredients
                     )
                     
                     DispatchQueue.main.async {
@@ -173,7 +155,6 @@ struct ContentView2: View {
             }
             .padding()
             //.navigationTitle("ContentView2")
-            
             // Destination mapping
             .navigationDestination(for: Route.self) { route in
                 switch route {
