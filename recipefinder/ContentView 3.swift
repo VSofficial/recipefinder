@@ -17,21 +17,6 @@ struct ContentView3: View {
     var selectedItems: Set<String>
     @State private var isOn = false
     
-//    var filteredRecipes: [Recipe] {
-//        recipes.filter { recipe in
-//            let recipeIngredients = recipe.ingredients
-//
-//            if isOn {
-//                return recipeIngredients.allSatisfy {
-//                    selectedIngredients.contains($0)
-//                }
-//            } else {
-//                return recipeIngredients.contains {
-//                    selectedIngredients.contains($0)
-//                }
-//            }
-//        }
-//    }
     
     var filteredRecipes: [Recipe] {
         recipes.filter { recipe in
@@ -91,8 +76,6 @@ struct ContentView3: View {
                     let isFullMatch = item.ingredients.allSatisfy {
                            selectedIngredients.contains($0)
                        }
-                       
-                   
                     
                     HStack {
                         
@@ -114,8 +97,6 @@ struct ContentView3: View {
                             .background(.yellow.opacity(0.2))
                             .clipShape(.capsule)
                            
-                            
-                    
                         }
                         .padding(6)
                     
@@ -140,7 +121,6 @@ struct ContentView3: View {
         Spacer()
             
         }
-       // .padding()
     }
     
 }
@@ -175,26 +155,6 @@ extension RecipeModelElement {
         )
     }
 }
-
-
-//extension RecipeModelElement {
-//    func toRecipe() -> Recipe {
-//        let ingredientsArray = cleanedIngredients
-//            .lowercased()
-//            .components(separatedBy: ",")
-//            //.map { cleanIngredient($0) }
-//            .map { normalizeIngredient(cleanIngredient($0)) }
-//            .filter { !$0.isEmpty }
-//
-//        return Recipe(
-//            name: translatedRecipeName,
-//            ingredients: ingredientsArray,
-//            description: translatedInstructions
-//        )
-//    }
-//}
-
-
 
 
 #Preview {

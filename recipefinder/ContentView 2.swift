@@ -28,6 +28,7 @@ struct ContentView2: View {
         
         NavigationStack(path: $path) {
             //@State var isChecked:Bool = true
+            
             VStack(spacing:15) {
                 
                 HStack {
@@ -47,7 +48,6 @@ struct ContentView2: View {
                             path.append(.content3)
                         }
                     }
-                    
                     Image(systemName: "arrow.right.circle")
                 }
                 
@@ -162,6 +162,23 @@ struct ContentView2: View {
                     ContentView3(selectedItems: selectedItems)
                 }
             }
+            
+            .toolbar() {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    
+                    NavigationLink {
+                        InventoryView()
+                    } label: {
+                        Text("Inventory")
+                            .foregroundStyle(Color.brown)
+                            .fontWeight(.medium)
+                        Image(systemName: "refrigerator.fill")
+                            .foregroundStyle(Color.brown)
+                            
+                    } 
+                }
+            }
+            
         }
     }
 }
