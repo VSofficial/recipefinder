@@ -45,3 +45,5 @@ func performSearch(searchText: String, source: [String]) -> [String] {
                query.contains(normalizedItem)
     }
 }
+
+
