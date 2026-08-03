@@ -36,7 +36,9 @@ struct RecipeHome: View {
                 .background(Color.brown)
                 .clipShape(Capsule())
 
+                
                 ScrollView(.horizontal) {
+                    
                     LazyHStack(spacing: 10) {
                         ForEach(Array(viewModel.selectedItems), id: \.self) { item in
                             HStack(spacing: 8) {
@@ -56,6 +58,8 @@ struct RecipeHome: View {
                             .background(Color.yellow.opacity(0.2))
                             .clipShape(Capsule())
                         }
+                        
+                        
                     }
                     .padding(10)
                 }
@@ -65,6 +69,24 @@ struct RecipeHome: View {
                 ScrollView {
                     LazyVStack(spacing: 10) {
                         ForEach(viewModel.filteredIngredients, id: \.self) { item in
+//                            HStack {
+//                                Image("veggie")
+//                                    .resizable()
+//                                    .frame(width: 40, height: 40)
+//                                    .foregroundColor(.orange.opacity(0.8))
+//
+//                                Text(item)
+//
+//                                Spacer()
+//
+//                                CheckboxView(
+//                                    isChecked: Binding(
+//                                        get: { viewModel.isSelected(item) },
+//                                        set: { viewModel.toggleSelection(item, isOn: $0) }
+//                                    )
+//                                )
+//                            }
+                            
                             HStack {
                                 Image("veggie")
                                     .resizable()
@@ -72,6 +94,12 @@ struct RecipeHome: View {
                                     .foregroundColor(.orange.opacity(0.8))
 
                                 Text(item)
+
+                                if viewModel.isInFridge(item) {
+                                    Image(systemName: "refrigerator.fill")
+                                        .font(.title3)
+                                        .foregroundStyle(.brown)
+                                }
 
                                 Spacer()
 
