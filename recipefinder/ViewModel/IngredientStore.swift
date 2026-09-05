@@ -13,7 +13,7 @@ final class IngredientStore {
     let ingredientSet: Set<String>
     let sortedIngredients: [String]
 
-    private init() {
+     init() {
         let raw = loadIngredients()?.ingredients ?? []
 
         let cleaned = raw.map {

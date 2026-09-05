@@ -15,10 +15,12 @@ struct ContentView: View {
                 .foregroundStyle(.tint)
             Text("Hello, world!")
         }
+        .background(Color(.pink))
         .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .background(Color.green)
 }

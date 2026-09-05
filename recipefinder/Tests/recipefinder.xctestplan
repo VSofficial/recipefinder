@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "47F1369D-196D-4965-8761-E052E936881C",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:recipefinder.xcodeproj",
+        "identifier" : "FE9918843046B21A00AD3165",
+        "name" : "recipefinderTestsUI"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:recipefinder.xcodeproj",
+        "identifier" : "FE648240304BFD59009D6C20",
+        "name" : "recipefinderTests"
+      }
+    }
+  ],
+  "version" : 1
+}

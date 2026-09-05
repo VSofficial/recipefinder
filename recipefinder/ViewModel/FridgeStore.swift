@@ -6,11 +6,6 @@
 //
 
 
-//
-//  FridgeStore.swift
-//  recipefinder
-//
-
 import Foundation
 import Observation
 
@@ -19,16 +14,29 @@ import Observation
 final class FridgeStore {
     static let shared = FridgeStore()
 
-    /// Items physically in the fridge (max 10, mapped to shelf slots)
-    private(set) var fridgeItems: [String] = []
+    // MARK: - Persistence
+    @ObservationIgnored
+    private let defaults: UserDefaults
+    private let fridgeItemsKey = "FridgeStore.fridgeItems"
+    private let selectedItemsKey = "FridgeStore.selectedItems"
 
-    /// Items the user has marked as "on hand" for recipe matching —
-    /// shared between RecipeHome and Inventory
-    var selectedItems: Set<String> = []
+    /// Items physically in the fridge (max 10, mapped to shelf slots)
+    private(set) var fridgeItems: [String] = [] {
+        didSet { persistFridgeItems() }
+    }
+
+    /// Items the user has marked as "on hand" for recipe matching
+    var selectedItems: Set<String> = [] {
+        didSet { persistSelectedItems() }
+    }
 
     let totalSlots = 10
 
-    private init() {}
+     init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+        loadFridgeItems()
+        loadSelectedItems()
+    }
 
     // MARK: - Fridge mutations
     func addItems(_ items: some Sequence<String>) {
@@ -38,7 +46,7 @@ final class FridgeStore {
 
     func removeItem(_ item: String) {
         fridgeItems.removeAll { $0 == item }
-        selectedItems.remove(item)   // keep selection consistent with inventory
+        selectedItems.remove(item)
     }
 
     // MARK: - Selection
@@ -57,4 +65,23 @@ final class FridgeStore {
     func removeFromSelection(_ item: String) {
         selectedItems.remove(item)
     }
+
+    // MARK: - Persistence helpers
+    private func persistFridgeItems() {
+        defaults.set(fridgeItems, forKey: fridgeItemsKey)
+    }
+
+    private func loadFridgeItems() {
+        fridgeItems = defaults.stringArray(forKey: fridgeItemsKey) ?? []
+    }
+
+    private func persistSelectedItems() {
+        defaults.set(Array(selectedItems), forKey: selectedItemsKey)
+    }
+
+    private func loadSelectedItems() {
+        let array = defaults.stringArray(forKey: selectedItemsKey) ?? []
+        selectedItems = Set(array)
+    }
 }
+

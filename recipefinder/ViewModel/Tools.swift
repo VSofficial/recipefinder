@@ -8,29 +8,6 @@
 import SwiftUI
 import Foundation
 
-//func performSearch(searchText: String, source: [String]) -> [String] {
-//    
-//    let search = searchText.lowercased()
-//
-//    if search.isEmpty {
-//        return Array(source.prefix(40)) 
-//    }
-//
-//    var result: [String] = []
-//
-//    for item in source {
-//        if item.hasPrefix(search) {
-//            result.insert(item, at: 0)
-//        } else if item.contains(search) {
-//            result.append(item)
-//        }
-//
-//        if result.count >= 40 { break }
-//    }
-//
-//    return result
-//}
-
 func performSearch(searchText: String, source: [String]) -> [String] {
     let query = normalizeIngredient(cleanIngredient(searchText))
     
@@ -47,3 +24,37 @@ func performSearch(searchText: String, source: [String]) -> [String] {
 }
 
 
+enum SortOption: String, CaseIterable {
+    case name = "Name"
+    case dateAdded = "Date Added"
+    case expiryDate = "Expiry Date"
+}
+
+struct FilterMenuExample: View {
+    @State private var selectedSort: SortOption = .name
+
+    var body: some View {
+        HStack {
+            
+            Menu {
+                ForEach(SortOption.allCases, id: \.self) { option in
+                    Button {
+                        selectedSort = option
+                    } label: {
+                        Label(option.rawValue, systemImage: selectedSort == option ? "checkmark" : "")
+                    }
+                }
+            } label : {
+                Image(systemName: "line.3.horizontal.decrease.circle")
+            }
+             .frame(width: 45, height:45)
+            .foregroundStyle(Color.white)
+            .font(Font.title2.bold())
+            .background(Color.brown)
+            .clipShape(Capsule())
+            .padding(2)
+            
+        }
+   
+    }
+}

@@ -6,19 +6,98 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		FE648245304BFD59009D6C20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FECABE402F5C22F900EC0D10 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FECABE472F5C22F900EC0D10;
+			remoteInfo = recipefinder;
+		};
+		FE99188B3046B21A00AD3165 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FECABE402F5C22F900EC0D10 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FECABE472F5C22F900EC0D10;
+			remoteInfo = recipefinder;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		FE648241304BFD59009D6C20 /* recipefinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = recipefinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE9918853046B21A00AD3165 /* recipefinderTestsUI.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = recipefinderTestsUI.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FECABE482F5C22F900EC0D10 /* recipefinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = recipefinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		FE648251304BFD96009D6C20 /* Exceptions for "recipefinder" folder in "recipefinderTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Tests/SwiftTesting/FridgeStoreTests.swift,
+				Tests/SwiftTesting/IngredientStoreTests.swift,
+				Tests/SwiftTesting/InventoryViewModelTests.swift,
+				Tests/SwiftTesting/RecipeHomeViewModelTests.swift,
+				Tests/SwiftTesting/RecipeMatchViewModelTests.swift,
+				Tests/SwiftTesting/Test.swift,
+				Tests/SwiftTesting/TestSupport.swift,
+				Tests/SwiftTesting/ToolsTests.swift,
+			);
+			target = FE648240304BFD59009D6C20 /* recipefinderTests */;
+		};
+		FE99181F3046956600AD3165 /* Exceptions for "recipefinder" folder in "recipefinder" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Tests/recipefinderTests/recipefinderTests.swift,
+				Tests/recipefinderTests/RecipeHomeUITests.swift,
+				Tests/SwiftTesting/FridgeStoreTests.swift,
+				Tests/SwiftTesting/IngredientStoreTests.swift,
+				Tests/SwiftTesting/InventoryViewModelTests.swift,
+				Tests/SwiftTesting/RecipeHomeViewModelTests.swift,
+				Tests/SwiftTesting/RecipeMatchViewModelTests.swift,
+				Tests/SwiftTesting/Test.swift,
+				Tests/SwiftTesting/TestSupport.swift,
+				Tests/SwiftTesting/ToolsTests.swift,
+			);
+			target = FECABE472F5C22F900EC0D10 /* recipefinder */;
+		};
+		FE9918923046B23D00AD3165 /* Exceptions for "recipefinder" folder in "recipefinderTestsUI" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Tests/recipefinderTests/recipefinderTests.swift,
+				Tests/recipefinderTests/RecipeHomeUITests.swift,
+			);
+			target = FE9918843046B21A00AD3165 /* recipefinderTestsUI */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		FECABE4A2F5C22F900EC0D10 /* recipefinder */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FE99181F3046956600AD3165 /* Exceptions for "recipefinder" folder in "recipefinder" target */,
+				FE9918923046B23D00AD3165 /* Exceptions for "recipefinder" folder in "recipefinderTestsUI" target */,
+				FE648251304BFD96009D6C20 /* Exceptions for "recipefinder" folder in "recipefinderTests" target */,
+			);
 			path = recipefinder;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FE64823E304BFD59009D6C20 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE9918823046B21A00AD3165 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FECABE452F5C22F900EC0D10 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -41,6 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				FECABE482F5C22F900EC0D10 /* recipefinder.app */,
+				FE9918853046B21A00AD3165 /* recipefinderTestsUI.xctest */,
+				FE648241304BFD59009D6C20 /* recipefinderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,6 +129,46 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FE648240304BFD59009D6C20 /* recipefinderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE648247304BFD59009D6C20 /* Build configuration list for PBXNativeTarget "recipefinderTests" */;
+			buildPhases = (
+				FE64823D304BFD59009D6C20 /* Sources */,
+				FE64823E304BFD59009D6C20 /* Frameworks */,
+				FE64823F304BFD59009D6C20 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FE648246304BFD59009D6C20 /* PBXTargetDependency */,
+			);
+			name = recipefinderTests;
+			packageProductDependencies = (
+			);
+			productName = recipefinderTests;
+			productReference = FE648241304BFD59009D6C20 /* recipefinderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FE9918843046B21A00AD3165 /* recipefinderTestsUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE99188D3046B21A00AD3165 /* Build configuration list for PBXNativeTarget "recipefinderTestsUI" */;
+			buildPhases = (
+				FE9918813046B21A00AD3165 /* Sources */,
+				FE9918823046B21A00AD3165 /* Frameworks */,
+				FE9918833046B21A00AD3165 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FE99188C3046B21A00AD3165 /* PBXTargetDependency */,
+			);
+			name = recipefinderTestsUI;
+			packageProductDependencies = (
+			);
+			productName = recipefinderTestsUI;
+			productReference = FE9918853046B21A00AD3165 /* recipefinderTestsUI.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		FECABE472F5C22F900EC0D10 /* recipefinder */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FECABE532F5C22FA00EC0D10 /* Build configuration list for PBXNativeTarget "recipefinder" */;
@@ -77,9 +198,20 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 2630;
 				LastUpgradeCheck = 2630;
 				TargetAttributes = {
+					FE648240304BFD59009D6C20 = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = FECABE472F5C22F900EC0D10;
+					};
+					FE9918843046B21A00AD3165 = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = FECABE472F5C22F900EC0D10;
+					};
 					FECABE472F5C22F900EC0D10 = {
 						CreatedOnToolsVersion = 26.3;
 					};
@@ -100,11 +232,27 @@
 			projectRoot = "";
 			targets = (
 				FECABE472F5C22F900EC0D10 /* recipefinder */,
+				FE9918843046B21A00AD3165 /* recipefinderTestsUI */,
+				FE648240304BFD59009D6C20 /* recipefinderTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FE64823F304BFD59009D6C20 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE9918833046B21A00AD3165 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FECABE462F5C22F900EC0D10 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +263,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FE64823D304BFD59009D6C20 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE9918813046B21A00AD3165 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FECABE442F5C22F900EC0D10 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,7 +286,105 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		FE648246304BFD59009D6C20 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FECABE472F5C22F900EC0D10 /* recipefinder */;
+			targetProxy = FE648245304BFD59009D6C20 /* PBXContainerItemProxy */;
+		};
+		FE99188C3046B21A00AD3165 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FECABE472F5C22F900EC0D10 /* recipefinder */;
+			targetProxy = FE99188B3046B21A00AD3165 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		FE648248304BFD59009D6C20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = A4M998RPR5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = varunsharma.recipefinderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/recipefinder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/recipefinder";
+			};
+			name = Debug;
+		};
+		FE648249304BFD59009D6C20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A4M998RPR5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = varunsharma.recipefinderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/recipefinder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/recipefinder";
+			};
+			name = Release;
+		};
+		FE99188E3046B21A00AD3165 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A4M998RPR5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = varunsharma.recipefinderTestsUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = recipefinder;
+			};
+			name = Debug;
+		};
+		FE99188F3046B21A00AD3165 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A4M998RPR5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = varunsharma.recipefinderTestsUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = recipefinder;
+			};
+			name = Release;
+		};
 		FECABE512F5C22FA00EC0D10 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -159,10 +419,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = A4M998RPR5;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -227,6 +488,8 @@
 				DEVELOPMENT_TEAM = A4M998RPR5;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -253,9 +516,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 2YB73RX598;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "mausi ki rasoi";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -295,9 +559,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 2YB73RX598;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "mausi ki rasoi";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -333,6 +598,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FE648247304BFD59009D6C20 /* Build configuration list for PBXNativeTarget "recipefinderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE648248304BFD59009D6C20 /* Debug */,
+				FE648249304BFD59009D6C20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE99188D3046B21A00AD3165 /* Build configuration list for PBXNativeTarget "recipefinderTestsUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE99188E3046B21A00AD3165 /* Debug */,
+				FE99188F3046B21A00AD3165 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FECABE432F5C22F900EC0D10 /* Build configuration list for PBXProject "recipefinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

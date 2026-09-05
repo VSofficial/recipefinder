@@ -80,12 +80,27 @@ private struct RecipeMatchRow: View {
                     .font(.system(size: 18))
 
                 HStack {
+                    
+               
+                HStack {
                     Text(matchLabel)
                     Text("ingredients")
                 }
                 .padding(6)
                 .background(.yellow.opacity(0.2))
                 .clipShape(.capsule)
+                
+                HStack {
+                    Text("Cuisine")
+                    
+                }
+                .padding(4)
+                .padding(.leading,6)
+                .padding(.trailing,6)
+                .background(.yellow.opacity(0.2))
+                .clipShape(.capsule)
+                }
+                
             }
             .padding(6)
 
