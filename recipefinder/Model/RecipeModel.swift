@@ -7,6 +7,28 @@
 
 import Foundation
 
+struct RecipeSeedElement: Codable {
+    let translatedRecipeName, translatedIngredients: String
+    let totalTimeInMins: Int
+    let cuisine, translatedInstructions: String
+    let url: String
+    let cleanedIngredients: String
+    let imageURL: String
+    let ingredientCount: Int
+
+    enum CodingKeys: String, CodingKey {
+        case translatedRecipeName = "TranslatedRecipeName"
+        case translatedIngredients = "TranslatedIngredients"
+        case totalTimeInMins = "TotalTimeInMins"
+        case cuisine = "Cuisine"
+        case translatedInstructions = "TranslatedInstructions"
+        case url = "URL"
+        case cleanedIngredients = "Cleaned-Ingredients"
+        case imageURL = "image-url"
+        case ingredientCount = "Ingredient-count"
+    }
+}
+
 struct IngredientsList: Codable {
     let ingredients: [String]
 }
@@ -29,29 +51,29 @@ func loadIngredients() -> IngredientsList? {
 
 
 // MARK: - RecipeModelElement
-struct RecipeModelElement: Codable {
-    let translatedRecipeName, translatedIngredients: String
-    let totalTimeInMins: Int
-    let cuisine, translatedInstructions: String
-    let url: String
-    let cleanedIngredients: String
-    let imageURL: String
-    let ingredientCount: Int
+//struct RecipeModelElement: Codable {
+//    let translatedRecipeName, translatedIngredients: String
+//    let totalTimeInMins: Int
+//    let cuisine, translatedInstructions: String
+//    let url: String
+//    let cleanedIngredients: String
+//    let imageURL: String
+//    let ingredientCount: Int
+//
+//    enum CodingKeys: String, CodingKey {
+//        case translatedRecipeName = "TranslatedRecipeName"
+//        case translatedIngredients = "TranslatedIngredients"
+//        case totalTimeInMins = "TotalTimeInMins"
+//        case cuisine = "Cuisine"
+//        case translatedInstructions = "TranslatedInstructions"
+//        case url = "URL"
+//        case cleanedIngredients = "Cleaned-Ingredients"
+//        case imageURL = "image-url"
+//        case ingredientCount = "Ingredient-count"
+//    }
+//}
 
-    enum CodingKeys: String, CodingKey {
-        case translatedRecipeName = "TranslatedRecipeName"
-        case translatedIngredients = "TranslatedIngredients"
-        case totalTimeInMins = "TotalTimeInMins"
-        case cuisine = "Cuisine"
-        case translatedInstructions = "TranslatedInstructions"
-        case url = "URL"
-        case cleanedIngredients = "Cleaned-Ingredients"
-        case imageURL = "image-url"
-        case ingredientCount = "Ingredient-count"
-    }
-}
-
-typealias RecipeModel = [RecipeModelElement]
+typealias RecipeModel = [RecipeSeedElement]
 
 
 func loadRecipes() -> RecipeModel? {
@@ -70,21 +92,6 @@ func loadRecipes() -> RecipeModel? {
     }
 }
 
-//func extractAllIngredients(from recipes: RecipeModel) -> [String] {
-//    var all: Set<String> = []
-//
-//    for recipe in recipes {
-//        let items = recipe.cleanedIngredients
-//            .lowercased()
-//            .components(separatedBy: ",")
-//            .map { cleanIngredient($0) }
-//
-//
-//        all.formUnion(items.filter { !$0.isEmpty })
-//    }
-//
-//    return Array(all)
-//}
 
 func extractAllIngredients(from recipes: RecipeModel) -> [String] {
     var all = Set<String>()
@@ -116,7 +123,6 @@ func extractAllIngredients(from recipes: RecipeModel) -> [String] {
                 // Final trim again
                 text = text.trimmingCharacters(in: .whitespacesAndNewlines)
                 
-           
                 return text
             }
             .filter { !$0.isEmpty }
@@ -126,7 +132,6 @@ func extractAllIngredients(from recipes: RecipeModel) -> [String] {
 
     return Array(all).sorted()
 }
-
 
 func cleanIngredient(_ text: String) -> String {
     var cleaned = text.lowercased()
@@ -155,14 +160,11 @@ func cleanIngredient(_ text: String) -> String {
         .components(separatedBy: " ")
         .filter { !$0.isEmpty && !stopWords.contains($0) }
     
-    // ✅ Keep only first 1–2 meaningful words
+    //  Keep only first 1–2 meaningful words
     let limitedWords = Array(words.prefix(2))
     
     return limitedWords.joined(separator: " ")
 }
-
-
-
 
 func categorizeIngredients(_ all: [String]) -> Ingredients {
     
@@ -189,3 +191,5 @@ func categorizeIngredients(_ all: [String]) -> Ingredients {
 
     return ingredients
 }
+
+

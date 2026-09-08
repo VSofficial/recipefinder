@@ -6,12 +6,23 @@
 //
 
 import SwiftUI
+import SwiftData
+
+//@main
+//struct recipefinderApp: App {
+//    var body: some Scene {
+//        WindowGroup {
+//            RecipeHome()
+//        }
+//    }
+//}
 
 @main
-struct recipefinderApp: App {
+struct recipeFinderApp: App {
     var body: some Scene {
         WindowGroup {
-            RecipeHome()
+            ContentView()
         }
+        .modelContainer(for: RecipeStored.self)
     }
 }
