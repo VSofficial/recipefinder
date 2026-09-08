@@ -49,12 +49,12 @@ final class RecipeMatchViewModel {
     }
 }
 
-extension RecipeStored {
-    func toRecipe() -> Recipe {
-        let ingredientsArray = cleanedIngredients
-            .components(separatedBy: ",")
-            .map { normalizeIngredient(cleanIngredient($0)) }
-            .filter { !$0.isEmpty }
-        return Recipe(name: name, ingredients: ingredientsArray, description: instructions)
-    }
-}
+//extension RecipeStored {
+//    func toRecipe() -> Recipe {
+//        let ingredientsArray = cleanedIngredients
+//            .components(separatedBy: ",")
+//            .map { normalizeIngredient(cleanIngredient($0)) }
+//            .filter { !$0.isEmpty }
+//        return Recipe(name: name, ingredients: ingredientsArray, description: instructions)
+//    }
+//}
