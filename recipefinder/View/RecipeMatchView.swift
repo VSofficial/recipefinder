@@ -19,7 +19,6 @@ struct RecipeMatchView: View {
             _viewModel = State(initialValue: RecipeMatchViewModel(selectedItems: selectedItems, context: context))
         }
 
-
     var body: some View {
         @Bindable var vm = viewModel
 
