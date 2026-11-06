@@ -22,13 +22,14 @@ struct Recipe:Hashable {
     var name: String
     var ingredients: [String]
     var description: String
+    var URL: String
 }
 
 var ingredientsExisting = Ingredients(veggies: ["Carrots", "Onions", "Beets"], fruits: ["Apples", "Bananas"], spices: ["Cinnamon", "Coriander"], dairy: ["Cheese"], others: ["Olive Oil", "Garlic"])
 
 var recipes: [Recipe] = [
-    Recipe(name: "Dal Tadka", ingredients: ["Carrots", "Coriander"], description: "Dal Tadka Description"),
-    Recipe(name: "Gajar Sabji", ingredients: ["Carrots", "Coriander", "Onions"], description: "Gajar Sabji Description"),
+    Recipe(name: "Dal Tadka", ingredients: ["Carrots", "Coriander"], description: "Dal Tadka Description", URL: ""),
+    Recipe(name: "Gajar Sabji", ingredients: ["Carrots", "Coriander", "Onions"], description: "Gajar Sabji Description", URL: ""),
  
 ]
     
