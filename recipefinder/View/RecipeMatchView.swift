@@ -6,13 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct RecipeMatchView: View {
     @State private var viewModel: RecipeMatchViewModel
 
-    init(selectedItems: Set<String>) {
-        _viewModel = State(initialValue: RecipeMatchViewModel(selectedItems: selectedItems))
-    }
+//    init(selectedItems: Set<String>) {
+//        _viewModel = State(initialValue: RecipeMatchViewModel(selectedItems: selectedItems))
+//    }
+    
+    init(selectedItems: Set<String>, context: ModelContext) {
+            _viewModel = State(initialValue: RecipeMatchViewModel(selectedItems: selectedItems, context: context))
+        }
 
     var body: some View {
         @Bindable var vm = viewModel
@@ -114,6 +119,50 @@ private struct RecipeMatchRow: View {
     }
 }
 
-#Preview {
-    RecipeMatchView(selectedItems: ["tomato", "potato", "salt", "oil"])
-}
+//#Preview {
+//    RecipeMatchView(selectedItems: ["tomato", "potato", "salt", "oil"])
+//}
+
+//#Preview {
+//    let container = try! ModelContainer(for: RecipeStored.self, configurations: .init(isStoredInMemoryOnly: true))
+//    let context = container.mainContext
+//
+//    context.insert(RecipeStored(
+//        url: "preview-1",
+//        name: "Aloo Tomato Sabzi",
+//        ingredientsRaw: "tomato, potato, salt, oil",
+//        cleanedIngredients: "tomato, potato, salt, oil",
+//        instructions: "Preview instructions",
+//        cuisine: "Indian",
+//        totalTimeInMins: 20,
+//        imageURL: "",
+//        ingredientCount: 4,
+//        normalizedIngredientsCSV: "tomato, potato, salt, oil"
+//    ))
+//
+//    RecipeMatchView(selectedItems: ["tomato", "potato", "salt", "oil"], context: context)
+//}
+
+//#Preview {
+//    let container = try! ModelContainer(
+//        for: RecipeStored.self,
+//        configurations: ModelConfiguration(isStoredInMemoryOnly: true)
+//    )
+//    let context = container.mainContext
+//
+//    context.insert(RecipeStored(
+//        url: "preview-1",
+//        name: "Aloo Tomato Sabzi",
+//        ingredientsRaw: "tomato, potato, salt, oil",
+//        cleanedIngredients: "tomato, potato, salt, oil",
+//        instructions: "Preview instructions",
+//        cuisine: "Indian",
+//        totalTimeInMins: 20,
+//        imageURL: "",
+//        ingredientCount: 4,
+//        normalizedIngredientsCSV: "tomato, potato, salt, oil"
+//    ))
+//
+//    RecipeMatchView(selectedItems: ["tomato", "potato", "salt", "oil"], context: context)
+//}
+

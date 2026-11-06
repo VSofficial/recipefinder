@@ -1,26 +1,38 @@
+////
+////  ContentView.swift
+////  recipefinder
+////
+////  Created by Varun Sharma on 07/03/26.
+////
 //
-//  ContentView.swift
-//  recipefinder
+//import SwiftUI
 //
-//  Created by Varun Sharma on 07/03/26.
+//struct ContentView: View {
+//    var body: some View {
+//        VStack {
+//            Image(systemName: "globe")
+//                .imageScale(.large)
+//                .foregroundStyle(.tint)
+//            Text("Hello, world!")
+//        }
+//        .background(Color(.pink))
+//        .padding()
+//    }
+//}
 //
+//#Preview {
+//    ContentView()
+//        .background(Color.green)
+//}
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .background(Color(.pink))
-        .padding()
-    }
-}
+    @Environment(\.modelContext) private var context
 
-#Preview {
-    ContentView()
-        .background(Color.green)
+    var body: some View {
+        RecipeHome()
+            
+    }
 }
