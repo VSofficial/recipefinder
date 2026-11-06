@@ -133,6 +133,6 @@ extension RecipeStored {
         let ingredientsArray: [String] = normalizedIngredientsCSV
             .components(separatedBy: ",")
             .filter { !$0.isEmpty }
-        return Recipe(name: name, ingredients: ingredientsArray, description: instructions)
+        return Recipe(name: name, ingredients: ingredientsArray, description: instructions, URL: url)
     }
 }

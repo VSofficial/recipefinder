@@ -44,6 +44,8 @@ final class RecipeMatchViewModel {
     func isFullMatch(_ recipe: Recipe) -> Bool {
         recipe.ingredients.allSatisfy { selectedIngredients.contains($0) }
     }
+    
+    
     func matchCountLabel(for recipe: Recipe) -> String {
         "\(selectedItems.count)/\(recipe.ingredients.count)"
     }
